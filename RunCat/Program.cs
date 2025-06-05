@@ -30,7 +30,7 @@ namespace RunCat
         static void Main()
         {
             // terminate runcat if there's any existing instance
-            var procMutex = new System.Threading.Mutex(true, "_RUNCAT_MUTEX", out var result);
+            var procMutex = new System.Threading.Mutex(true, "_RUNCAT_MUTEX", out var result); // unique name for the mutex
             if (!result)
             {
                 return;
@@ -139,6 +139,10 @@ namespace RunCat
                 new ToolStripMenuItem("CPU 40%", null, SetSpeedLimit)
                 {
                     Checked = speed.Equals("cpu 40%")
+                },
+                new ToolStripMenuItem("CPU 50%", null, SetSpeedLimit)
+                {
+                    Checked = speed.Equals("cpu 50%")
                 }
             });
 
@@ -263,9 +267,11 @@ namespace RunCat
             else if (speed.Equals("cpu 20%"))
                 minCPU = 50f;
             else if (speed.Equals("cpu 30%"))
-                minCPU = 33f;    
+                minCPU = 33f;
             else if (speed.Equals("cpu 40%"))
-                minCPU = 25f;   
+                minCPU = 25f;
+            else if (speed.Equals("cpu 50%"))
+                minCPU = 20f;  
         }
 
         private void SetSpeedLimit(object sender, EventArgs e)
